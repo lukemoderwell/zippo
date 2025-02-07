@@ -103,7 +103,13 @@ export async function POST(request: Request) {
             - Be modern and attractive
             - Include headings, paragraphs, and a call-to-action button
             - Use modern fonts like Inter and Roboto
-            - Be responsive and mobile friendly`,
+            - Be responsive and mobile friendly
+            - The landing page should be a single page that is easy to navigate and use
+            - The landing page should have a header, a main content area, and a footer
+            - The header should have a logo and a navigation menu
+            - The main content area should have a hero section, a features section, and a call-to-action section
+            - The footer should have a copyright notice (2025) and a social media section
+            `,
         },
       ],
       response_format: { type: 'json_object' },

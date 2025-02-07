@@ -134,6 +134,7 @@ export function CreateZipModal({
             <Input
               id='googleAnalyticsId'
               value={googleAnalyticsId}
+              placeholder='G-XXXXXXXXX'
               onChange={(e) => setGoogleAnalyticsId(e.target.value)}
             />
           </div>

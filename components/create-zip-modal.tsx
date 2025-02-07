@@ -28,6 +28,7 @@ export function CreateZipModal({
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [appUrl, setAppUrl] = useState('');
+  const [googleAnalyticsId, setGoogleAnalyticsId] = useState('');
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -124,6 +125,16 @@ export function CreateZipModal({
               value={appUrl}
               onChange={(e) => setAppUrl(e.target.value)}
               required
+            />
+          </div>
+          <div>
+            <Label htmlFor='googleAnalyticsId'>
+              Google Analytics ID (optional)
+            </Label>
+            <Input
+              id='googleAnalyticsId'
+              value={googleAnalyticsId}
+              onChange={(e) => setGoogleAnalyticsId(e.target.value)}
             />
           </div>
           <div>

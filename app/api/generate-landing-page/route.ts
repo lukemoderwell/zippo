@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const description = formData.get('description') as string;
     const appUrl = formData.get('appUrl') as string;
     const screenshot = formData.get('screenshot') as File | null;
-
+    const googleAnalyticsId = formData.get('googleAnalyticsId') as string;
     if (!name || !description || !appUrl) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     }
 
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: 'o3-mini',
       messages: [
         {
           role: 'system',
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
         "description": "A brief description of the app",
         "app_url": "The app's URL",
         "landing_page_html": "The complete HTML for the landing page including inline CSS"
-        }`
+        }`,
         },
         {
           role: 'user',
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
             Description: ${description}
             App URL: ${appUrl}
             App Screenshot Description: ${screenshotDescription}
-
+            Google Analytics ID: ${googleAnalyticsId}
             The App Screenshot is only to be used as a reference for the colors, styles and features of the app.
 
             The landing page should:
@@ -103,11 +103,11 @@ export async function POST(request: Request) {
             - Be modern and attractive
             - Include headings, paragraphs, and a call-to-action button
             - Use modern fonts like Inter and Roboto
-            - Be responsive and mobile friendly`
-        }
+            - Be responsive and mobile friendly`,
+        },
       ],
-      response_format: { type: "json_object" },
-      temperature: 0.7,
+      response_format: { type: 'json_object' },
+    //   temperature: 0.7,
     });
 
     const rawResponse = response.choices[0].message.content || '';
@@ -118,7 +118,7 @@ export async function POST(request: Request) {
     // Parse and validate the response
     const parsedResponse = JSON.parse(rawResponse);
     const validatedResponse = LandingPageSchema.parse(parsedResponse);
-    
+
     return NextResponse.json(validatedResponse);
   } catch (error) {
     console.error('Error generating landing page:', error);

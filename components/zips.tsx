@@ -39,7 +39,7 @@ export function Zips({ zips }: { zips: Zip[] }) {
               </h3>
               <div className='border rounded p-4 bg-gray-50'>
                 <div
-                  className='whitespace-pre-wrap'
+                  className='border border-gray-100 rounded-md'
                   dangerouslySetInnerHTML={{
                     __html: zip.landingPage,
                   }}
